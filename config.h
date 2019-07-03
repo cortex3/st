@@ -6,7 +6,7 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *font = "mono:pixelsize=16:antialias=true:autohint=true";
-static int borderpx = 2;
+static int borderpx = 20;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -205,8 +205,12 @@ MouseKey mkeys[] = {
 	{ Button5,              MODKEY|ShiftMask,         zoom,    {.f =  -1} },
 };
 
-static char *openurlcmd[] = { "/bin/sh", "-c",
+/*static char *openurlcmd[] = { "/bin/sh", "-c",
     "xurls | uniq | dmenu -l 10 | xargs -r xdg-open",
+    "externalpipe", NULL }; */
+
+static char *openurlcmd[] = { "/bin/sh", "-c",
+    "xurls | uniq | rofi -dmenu -show run -i -lines 10 -eh 1 -width 50 -padding 50 -opacity '85' -font 'Droid Sans 16' | xargs -r xdg-open",
     "externalpipe", NULL };
 
 static Shortcut shortcuts[] = {
@@ -240,7 +244,7 @@ static Shortcut shortcuts[] = {
 	{ MODKEY|ShiftMask,     XK_J,           zoom,           {.f = -1} },
 	{ MODKEY|ShiftMask,     XK_U,           zoom,           {.f = +2} },
 	{ MODKEY|ShiftMask,     XK_D,           zoom,           {.f = -2} },
-    	{ MODKEY,		XK_l,		externalpipe,	{ .v = openurlcmd } },
+    	{ MODKEY,		XK_x,		externalpipe,	{ .v = openurlcmd } },
 };
 
 /*
